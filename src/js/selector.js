@@ -126,7 +126,7 @@ function setup() {
                             let tempDiv = document.createElement('div');
                             let tempImg = document.createElement('img');
                             let tempFragment = document.createDocumentFragment();
-                            let tempName = this.querySelector('.eng').innerText;
+                            let tempName = this.querySelector('.eng').textContent;
                             let namePlate = createNamePlate(tempName);
 
                             tempImg.id = 'img' + availableCount;
