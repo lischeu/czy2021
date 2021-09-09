@@ -131,7 +131,7 @@ function setup() {
 
                             tempImg.id = 'img' + availableCount;
                             tempDiv.id = 'wrapper' + availableCount;
-                            tempImg.src = portraitFolder + '/cropped/' + tempName + portraitFormat + '?' + Math.floor(Math.random() * 100);
+                            tempImg.src = portraitFolder + 'cropped/' + tempName + portraitFormat + '?' + Math.floor(Math.random() * 100);
                             count++;
 
                             tempImg.addEventListener('dragstart', e => pick(e));
