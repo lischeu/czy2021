@@ -1,4 +1,4 @@
-const contestantsCSV = 'contestants'; // csv where trainee info is stored
+const contestantsCSV = 'contestants.csv'; // csv where trainee info is stored
 const portraitFolder ='./src/img/portraits/'; // folder where trainee pictures are located
 const portraitFormat = '.png'; // format of portrait image
 
@@ -59,10 +59,10 @@ function preload() {
 
 function setup() {
     let traineeList = document.createDocumentFragment();
-    
+
     for (let i = 0; i < contestants.getRowCount(); i++) {
         let traineeBox = document.createElement('div');
-        
+
         let traineeName = document.createElement('span');
         let traineeFirst = document.createElement('span');
         let traineeHanzi = document.createElement('span');
@@ -70,7 +70,7 @@ function setup() {
 
         let portraitBox = document.createElement('div');
         let portraitImg = document.createElement('img');
-        
+
         traineeBox.className = 'traineeBox';
         portraitBox.className = 'portrait';
         traineeName.className = 'name';
@@ -85,7 +85,7 @@ function setup() {
         traineeBox.appendChild(portraitBox);
         traineeBox.appendChild(traineeName);
         traineeBox.appendChild(traineeCompany);
-        
+
         traineeBox.addEventListener('mouseover', function() {
             traineeBox.style.backgroundColor = '#7B67FE';
             traineeBox.style.boxShadow = 'inset 0.5em 0.5em lavender';
@@ -95,7 +95,7 @@ function setup() {
             traineeBox.style.backgroundColor = '#673ffc';
             traineeBox.style.boxShadow = 'inset 0.5em 0.5em #7B67FE';
         });
-    
+
         portraitImg.src = portraitFolder + contestants.getString(i, 0) + portraitFormat + '';
 
         traineeFirst.innerText = contestants.getString(i, 0).trim();
@@ -118,7 +118,7 @@ function setup() {
                     this.className = this.className + ' chosen';
                     let memBoxes = document.querySelectorAll("[id^='mem']");
                     chosenBox.appendChild(this);
-                    
+
                     sortAlphabetical(chosenBox);
 
                     for (let j = 0 ; j < memBoxes.length; j++) {
@@ -128,7 +128,7 @@ function setup() {
                             let tempFragment = document.createDocumentFragment();
                             let tempName = this.querySelector('.eng').innerText;
                             let namePlate = createNamePlate(tempName);
-                            
+
                             tempImg.id = 'img' + availableCount;
                             tempDiv.id = 'wrapper' + availableCount;
                             tempImg.src = portraitFolder + '/cropped/' + tempName + portraitFormat + '?' + Math.floor(Math.random() * 100);
@@ -147,7 +147,7 @@ function setup() {
                     }
                 }
             }
-            
+
             else {
                 this.className = 'traineeBox';
                 this.setAttribute('chosen', 'false');
@@ -157,7 +157,7 @@ function setup() {
             }
         });
     }
-    
+
 }
 
 function nextAvailableNumber() {
@@ -201,14 +201,14 @@ function searchBoxHandler() {
 // search current list of contestants
 function searchContestants(searchQuery) {
     let contestantsToSearch, elementToSearch;
-    let searchFilter, searchName, searchCompany; 
-    
+    let searchFilter, searchName, searchCompany;
+
     contestantsToSearch = allTraineeBoxes;
-    
+
     searchName = nameFilter.checked;
     searchCompany = companyFilter.checked;
     searchQuery = searchBox.value.toLowerCase();
-    
+
     switch (true) {
         case searchName: searchFilter = 'name'; break;
         case searchCompany: searchFilter = 'company'; break;
@@ -277,7 +277,7 @@ function sortAlphabetical(div) {
 function removeMember(member) {
 
     member = member.toLowerCase().trim();
-    
+
     let boxToDelete = document.createElement('div');
     let wrapperBoxes = [...allMemberBoxes].filter(element => element.querySelector("div[id^='wrapper']"));
 
@@ -288,7 +288,7 @@ function removeMember(member) {
             wrapperBoxes[i] = allMemberBoxes[i].querySelector("div[id^='wrapper']");
         }
     }
-    
+
 
     wrapperBoxes.forEach(element => {
         if(element.innerHTML.toLowerCase().trim().includes(member)) {
@@ -299,7 +299,7 @@ function removeMember(member) {
     let boxId = parseInt(boxToDelete.parentNode.id.substr(3));
 
     boxToDelete.parentNode.removeChild(document.getElementById(boxToDelete.id));
-    
+
     for (let i = boxId - 1, j = i + 1; i < allMemberBoxes.length, j < allMemberBoxes.length;i++, j++) {
         let currentParent = document.getElementById(allMemberBoxes[i].id);
         let newParent = document.getElementById(allMemberBoxes[j].id);
@@ -319,7 +319,7 @@ function clickImageHandler() {
     const traineeList = document.querySelectorAll('.traineeBox');
     allMemberBoxes.forEach(element => {
         element.addEventListener('click', function(){
-            
+
             let traineeName, traineeBoxToRemove, traineeBoxToAdd = document.createDocumentFragment();
 
             if (this.hasChildNodes())
@@ -337,4 +337,3 @@ function clickImageHandler() {
         });
     });
 }
-    
